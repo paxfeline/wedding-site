@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <title>Renae and David Get Hitched!</title>
+    <style>
+#vhs-box
+{
+    height: 100vh;
+    left: calc(50vw - 27.7vh);
+    position: absolute;
+    z-index: 1;
+    animation: box 3s both;
+}
+
+#vhs-tape
+{
+    transform: rotate(-90deg);
+    width: 100vh;
+    left: calc(50vw - 49vh);
+    top: calc(50vh - 27.7vh);
+    position: absolute;
+    z-index: 0;
+    animation: tape 3s both;
+}
+
+@keyframes tape {
+  0% {
+    /*left: calc(50vw - 49vh);
+    transform: rotate(-90deg);*/
+    z-index: 0;
+  }
+
+  33% {
+    transform: rotate(-90deg);
+    left: calc(50vw + 10vh);
+  }
+
+  60% {
+    z-index: 2;
+  }
+
+  66% {
+    transform: rotate(0deg);
+    left: calc(50vw);
+  }
+
+  100%
+  {
+    transform: rotate(0deg);
+    left: calc(50vw - 50vh);
+    z-index: 2;
+  }
+}
+
+@keyframes box {
+  75% {
+    filter: sepia(0%);
+  }
+
+  100%
+  {
+    filter: sepia(100%);
+  }
+}
+    </style>
+  </head>
+  <body>
+
+<img src="wedding 2.png" id="vhs-tape">
+<img src="wedding 1.png" id="vhs-box">
+
+  </body>
+</html>
