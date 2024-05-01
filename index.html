@@ -4,30 +4,42 @@
     <meta charset="utf-8" />
     <title>Renae and David Get Hitched!</title>
     <style>
+
 #vhs-box
 {
     height: 100vh;
     left: calc(50vw - 27.7vh);
     position: absolute;
     z-index: 1;
-    animation: box 3s both;
 }
 
 #vhs-tape
 {
-    transform: rotate(-90deg);
-    width: 100vh;
-    left: calc(50vw - 49vh);
-    top: calc(50vh - 27.7vh);
-    position: absolute;
-    z-index: 0;
-    animation: tape 3s both;
+  transform: rotate(-90deg);
+  width: 100vh;
+  left: calc(50vw - 49vh);
+  top: calc(50vh - 27.7vh);
+  position: absolute;
+  z-index: 0;
+}
+
+#vhs-tape.put-back
+{
+  animation: tape 3s reverse both;
+}
+
+#open-box:checked + label #vhs-box
+{
+  animation: box 3s both;
+}
+
+#open-box:checked + label #vhs-tape
+{
+  animation: tape 3s both;
 }
 
 @keyframes tape {
   0% {
-    /*left: calc(50vw - 49vh);
-    transform: rotate(-90deg);*/
     z-index: 0;
   }
 
@@ -36,19 +48,29 @@
     left: calc(50vw + 10vh);
   }
 
-  60% {
+  50% {
     z-index: 2;
   }
 
-  66% {
+  56% {
     transform: rotate(0deg);
     left: calc(50vw);
+    }
+
+ 66% {
+    top: calc(50vh - 27.7vh);
+    left: calc(50vw - 50vh);
+    width: 100vh;
   }
 
   100%
   {
-    transform: rotate(0deg);
-    left: calc(50vw - 50vh);
+    /*
+    top: calc(50vh - 28vw);
+    left: 0%;
+    width: 100vw;
+    */
+    transform: rotate(0deg) scale(1.25);
     z-index: 2;
   }
 }
@@ -67,8 +89,32 @@
   </head>
   <body>
 
-<img src="wedding 2.png" id="vhs-tape">
-<img src="wedding 1.png" id="vhs-box">
+<input type="checkbox" id="open-box">
+<label for="open-box">
+<img src="wedding2.png" id="vhs-tape">
+<img src="wedding1.png" id="vhs-box">
+</label>
+
+<script>
+  const cb = document.querySelector("#open-box");
+  const label = document.querySelector("label");
+  const tape = document.querySelector("#vhs-tape");
+
+  label.addEventListener("pointerdown",
+    e =>
+    {
+      console.log("PD");
+      tape.classList.remove("put-back");
+    });
+
+  cb.addEventListener("click",
+    e =>
+    {
+      console.log(e);
+      if (!e.target.checked)
+        setTimeout(() => tape.classList.add("put-back"))
+    });
+</script>
 
   </body>
 </html>
