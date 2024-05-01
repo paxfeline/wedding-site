@@ -106,28 +106,31 @@
 #hint
 {
   position: absolute;
-  top: 19vh;
-  left: 34vw;
-  width: 20vw;
+  top: 20vh;
+  left: 30vw;
+  width: 40vw;
+  z-index: 1;
+  visibility: hidden;
+  /*
+  background-image: radial-gradient(white, transparent);
+  text-align: center;
+  font-size: 7vw;
+  font-style: italic;
   border-radius: 100%;
   padding: 7vw;
-  text-align: center;
-  z-index: 1;
-  font-size: 7vw;
-  background-image: radial-gradient(white, transparent);
-  visibility: hidden;
+  */
 }
 
 #hint.fade-in
 {
   visibility: visible;
-  animation: fade 1s 5s both;
+  animation: fade 0.5s 5s both;
 }
 
 #hint.fade-out
 {
   visibility: visible;
-  animation: fade 1s reverse both;
+  animation: fade 0.5s reverse both;
 }
 
 #hint.animation-done
@@ -141,11 +144,13 @@
   from
   {
     opacity: 0;
+    transform: scale(0%);
   }
 
   to
   {
     opacity: 1;
+    transform: scale(100%);
   }
 }
 
@@ -157,7 +162,7 @@
 <label for="open-box">
 <img src="wedding2.png" id="vhs-tape">
 <img src="wedding1.png" id="vhs-box">
-<div class="fade-in" id="hint">Click to Open</div>
+<img class="fade-in" id="hint" src="click.png">
 </label>
 
 
