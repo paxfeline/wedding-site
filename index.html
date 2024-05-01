@@ -28,6 +28,17 @@
   animation: tape 3s reverse both;
 }
 
+#vhs-box.put-back
+{
+  animation: box 3s reverse both;
+}
+
+#open-box
+{
+  position: absolute;
+  visibility: hidden;
+}
+
 #open-box:checked + label #vhs-box
 {
   animation: box 3s both;
@@ -85,6 +96,47 @@
     filter: sepia(100%);
   }
 }
+
+#hint
+{
+  position: absolute;
+  top: 19vh;
+  left: 34vw;
+  width: 20vw;
+  border-radius: 100%;
+  padding: 7vw;
+  text-align: center;
+  z-index: 1;
+  font-size: 7vw;
+  background-image: radial-gradient(white, transparent);
+  visibility: hidden;
+}
+
+#hint.fade-in
+{
+  visibility: visible;
+  animation: fade 1s 5s both;
+}
+
+#hint.fade-out
+{
+  visibility: visible;
+  animation: fade 1s reverse both;
+}
+
+@keyframes fade
+{
+  from
+  {
+    opacity: 0;
+  }
+
+  to
+  {
+    opacity: 1;
+  }
+}
+
     </style>
   </head>
   <body>
@@ -93,18 +145,36 @@
 <label for="open-box">
 <img src="wedding2.png" id="vhs-tape">
 <img src="wedding1.png" id="vhs-box">
+<div class="fade-in" id="hint">Click to Open</div>
 </label>
+
+
 
 <script>
   const cb = document.querySelector("#open-box");
   const label = document.querySelector("label");
   const tape = document.querySelector("#vhs-tape");
+  const box = document.querySelector("#vhs-box");
+  const hint = document.querySelector("#hint");
+
+  let hint_showing = false;
+
+  hint.classList.add("fade-in");
+  hint.addEventListener("animationend",
+  () =>
+  {
+    hint_showing = true;
+  });
 
   label.addEventListener("pointerdown",
     e =>
     {
       console.log("PD");
       tape.classList.remove("put-back");
+      box.classList.remove("put-back");
+      hint.classList.remove("fade-in");
+      if (hint_showing)
+        setTimeout(() => hint.classList.add("fade-out"));
     });
 
   cb.addEventListener("click",
@@ -112,7 +182,14 @@
     {
       console.log(e);
       if (!e.target.checked)
-        setTimeout(() => tape.classList.add("put-back"))
+      {
+        setTimeout(
+          () =>
+          {
+            tape.classList.add("put-back");
+            box.classList.add("put-back");
+          }, 100);
+        }
     });
 </script>
 
