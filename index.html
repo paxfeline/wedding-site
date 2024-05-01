@@ -49,6 +49,12 @@
   animation: tape 3s both;
 }
 
+#vhs-tape.animation-done
+{
+  transform: rotate(0deg) scale(1.25);
+  z-index: 2;
+}
+
 @keyframes tape {
   0% {
     z-index: 0;
@@ -76,14 +82,14 @@
 
   100%
   {
-    /*
-    top: calc(50vh - 28vw);
-    left: 0%;
-    width: 100vw;
-    */
     transform: rotate(0deg) scale(1.25);
     z-index: 2;
   }
+}
+
+#vhs-box.animation-done
+{
+  filter: sepia(100%);
 }
 
 @keyframes box {
@@ -124,6 +130,12 @@
   animation: fade 1s reverse both;
 }
 
+#hint.animation-done
+{
+  opacity: 1;
+  visibility: visible;
+}
+
 @keyframes fade
 {
   from
@@ -157,24 +169,54 @@
   const box = document.querySelector("#vhs-box");
   const hint = document.querySelector("#hint");
 
-  let hint_showing = false;
+  //let hint_shown = false;
 
   hint.classList.add("fade-in");
+
   hint.addEventListener("animationend",
   () =>
   {
-    hint_showing = true;
-  });
+    if (hint.classList.contains("fade-in"))
+    {
+      hint.classList.remove("fade-in");
+      hint.classList.add("animation-done");
+      //hint_shown = true;
+    }
 
+    if (hint.classList.contains("fade-out"))
+    {
+      hint.classList.remove("fade-out");
+    }
+  });
+  
   label.addEventListener("pointerdown",
+  e =>
+  {
+    console.log("PD");
+    hint.classList.remove("fade-in");
+    if (hint.classList.contains("animation-done"))
+      setTimeout(
+        () =>
+        {
+          hint.classList.add("fade-out");
+          hint.classList.remove("animation-done");
+        });
+  });
+  
+  tape.addEventListener("animationend",
     e =>
     {
-      console.log("PD");
-      tape.classList.remove("put-back");
-      box.classList.remove("put-back");
-      hint.classList.remove("fade-in");
-      if (hint_showing)
-        setTimeout(() => hint.classList.add("fade-out"));
+      console.log("AD");
+      if (cb.checked)
+      {
+        tape.classList.add("animation-done");
+        box.classList.add("animation-done");
+      }
+      else
+      {
+        tape.classList.remove("put-back");
+        box.classList.remove("put-back");
+      }
     });
 
   cb.addEventListener("click",
@@ -188,6 +230,8 @@
           {
             tape.classList.add("put-back");
             box.classList.add("put-back");
+            tape.classList.remove("animation-done");
+            box.classList.remove("animation-done");
           }, 100);
         }
     });
