@@ -5,21 +5,31 @@
     <title>Renae and David Get Hitched!</title>
     <style>
 
+body
+{
+  background-image: url(back.png);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
 #vhs-box
 {
-    height: 100vh;
-    left: calc(50vw - 27.7vh);
-    position: absolute;
-    z-index: 1;
+  position: absolute;
+  top: calc(50vh - 44.6vmin);
+  left: calc(50vw - 27.7vmin);
+  height: 100vmin;
+  z-index: 1;
 }
 
 #vhs-tape
 {
-  transform: rotate(-90deg);
-  width: 100vh;
-  left: calc(50vw - 49vh);
-  top: calc(50vh - 27.7vh);
   position: absolute;
+  width: 100vmin;
+  left: calc(50vw - 49vmin);
+  top: calc(50vh - 22.3vmin);
+  transform: rotate(-90deg);
   z-index: 0;
 }
 
@@ -53,6 +63,7 @@
 {
   transform: rotate(0deg) scale(1.25);
   z-index: 2;
+  animation: unset !important;
 }
 
 @keyframes tape {
@@ -62,7 +73,7 @@
 
   33% {
     transform: rotate(-90deg);
-    left: calc(50vw + 10vh);
+    left: calc(50vw + 10vmin);
   }
 
   50% {
@@ -71,13 +82,14 @@
 
   56% {
     transform: rotate(0deg);
-    left: calc(50vw);
+    left: calc(50vw + 10vmin);
     }
 
  66% {
-    top: calc(50vh - 27.7vh);
-    left: calc(50vw - 50vh);
-    width: 100vh;
+    /*
+    top: 23.3vh;
+    */
+    left: calc(50vw - 50vmin);
   }
 
   100%
@@ -103,28 +115,26 @@
   }
 }
 
-#hint
+#hint-container
 {
   position: absolute;
-  top: 20vh;
-  left: 30vw;
-  width: 40vw;
-  z-index: 1;
-  visibility: hidden;
-  /*
-  background-image: radial-gradient(white, transparent);
+  top: calc(50vh - 30vmin);
+  height: 60vmin;
+  width: 100vw;
   text-align: center;
-  font-size: 7vw;
-  font-style: italic;
-  border-radius: 100%;
-  padding: 7vw;
-  */
+  z-index: 1;
+}
+
+#hint
+{
+  visibility: hidden;
+  height: 100%;
 }
 
 #hint.fade-in
 {
   visibility: visible;
-  animation: fade 0.5s 5s both;
+  animation: fade 0.5s 3s both;
 }
 
 #hint.fade-out
@@ -154,6 +164,30 @@
   }
 }
 
+#confirm
+{
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  width: 20vw;
+  min-width: 50vmin;
+  z-index: 3;
+  animation: confirm 1s 7s both;
+}
+
+@keyframes confirm
+{
+  from
+  {
+    transform: rotate(0deg) scale(0%);
+  }
+
+  to
+  {
+    transform: rotate(6.969turn) scale(100%);
+  }
+}
+
     </style>
   </head>
   <body>
@@ -162,8 +196,14 @@
 <label for="open-box">
 <img src="wedding2.png" id="vhs-tape">
 <img src="wedding1.png" id="vhs-box">
-<img class="fade-in" id="hint" src="click.png">
+<div id="hint-container">
+  <img class="fade-in" id="hint" src="click.png">
+</div>
 </label>
+
+<a target="renae_david_2024_confirm_tab" href="https://docs.google.com/forms/d/e/1FAIpQLSdJ3sbosVn_ngsMDAdjT2lagDArTbzyaYpw_BRZtYJrnVyZZg/viewform?usp=sf_link">
+<img id="confirm" src="confirm.png">
+</a>
 
 
 
