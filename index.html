@@ -175,6 +175,10 @@ body
   animation: confirm 1s 7s both;
 }
 
+#confirm:hover {
+  filter: drop-shadow(0 0 1em lightblue);
+}
+
 @keyframes confirm
 {
   from
@@ -185,6 +189,30 @@ body
   to
   {
     transform: rotate(6.969turn) scale(100%);
+  }
+}
+
+#costume
+{
+  position: absolute;
+  bottom: 3%;
+  right: 3%;
+  width: 20vw;
+  min-width: 50vmin;
+  z-index: 3;
+  animation: costume 1s 7.5s both;
+}
+
+@keyframes costume
+{
+  from
+  {
+    transform: rotate(0deg) scale(0%);
+  }
+
+  to
+  {
+    transform: rotate(-3.99turn) scale(100%);
   }
 }
 
@@ -205,7 +233,7 @@ body
 <img id="confirm" src="confirm.png">
 </a>
 
-
+<img id="costume" src="crow.png">
 
 <script>
   const cb = document.querySelector("#open-box");
@@ -213,6 +241,9 @@ body
   const tape = document.querySelector("#vhs-tape");
   const box = document.querySelector("#vhs-box");
   const hint = document.querySelector("#hint");
+  const costume = document.querySelector("#costume");
+
+  if (Math.random() < 0.12) costume.src = "tom.png";
 
   //let hint_shown = false;
 
